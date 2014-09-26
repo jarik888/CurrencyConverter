@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://producers.eestipank.info/types" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Report" type="typ:ReportType" xmlns:typ="http://producers.eestipank.info/types"/>
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="FixingsDate"/>
+      <xs:element type="typ:CurrenciesType" name="Currencies" xmlns:typ="http://producers.eestipank.info/types"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReportType">
+    <xs:sequence>
+      <xs:element type="typ:HeaderType" name="Header" xmlns:typ="http://producers.eestipank.info/types"/>
+      <xs:element type="typ:BodyType" name="Body" xmlns:typ="http://producers.eestipank.info/types"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CurrenciesType">
+    <xs:sequence>
+      <xs:element type="typ:CurrencyType" name="Currency" maxOccurs="unbounded" minOccurs="0" xmlns:typ="http://producers.eestipank.info/types"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Type"/>
+      <xs:element type="xs:string" name="Version"/>
+      <xs:element type="xs:string" name="Date"/>
+      <xs:element type="xs:string" name="Language"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CurrencyType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="optional"/>
+        <xs:attribute type="xs:string" name="text" use="optional"/>
+        <xs:attribute type="xs:string" name="rate" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>
